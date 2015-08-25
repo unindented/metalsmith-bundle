@@ -36,6 +36,7 @@
     "lodash":                    "^3.10.1",
     "markdown-it":               "^4.4.0",
     "markdown-it-abbr":          "^1.0.0",
+    "markdown-it-container":     "^1.0.0",
     "markdown-it-deflist":       "^1.0.0",
     "markdown-it-footnote":      "^1.0.0",
     "markdown-it-ins":           "^1.0.0",

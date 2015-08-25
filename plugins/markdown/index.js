@@ -3,6 +3,7 @@
 import hljs from 'highlight.js';
 import markdown from 'markdown-it';
 import mdabbr from 'markdown-it-abbr';
+import mdcontainer from 'markdown-it-container';
 import mddeflist from 'markdown-it-deflist';
 import mdfootnote from 'markdown-it-footnote';
 import mdins from 'markdown-it-ins';
@@ -42,6 +43,7 @@ export default function (options) {
   let renderer = markdown(preset)
     .set(others)
     .use(mdabbr)
+    .use(mdcontainer)
     .use(mddeflist)
     .use(mdfootnote)
     .use(mdins)
