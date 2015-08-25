@@ -20,6 +20,10 @@ var _markdownItAbbr = require('markdown-it-abbr');
 
 var _markdownItAbbr2 = _interopRequireDefault(_markdownItAbbr);
 
+var _markdownItContainer = require('markdown-it-container');
+
+var _markdownItContainer2 = _interopRequireDefault(_markdownItContainer);
+
 var _markdownItDeflist = require('markdown-it-deflist');
 
 var _markdownItDeflist2 = _interopRequireDefault(_markdownItDeflist);
@@ -79,7 +83,7 @@ exports['default'] = function (options) {
 
   var others = _objectWithoutProperties(_options, ['preset', 'pattern']);
 
-  var renderer = (0, _markdownIt2['default'])(preset).set(others).use(_markdownItAbbr2['default']).use(_markdownItDeflist2['default']).use(_markdownItFootnote2['default']).use(_markdownItIns2['default']).use(_markdownItMark2['default']).use(_markdownItSub2['default']).use(_markdownItSup2['default']);
+  var renderer = (0, _markdownIt2['default'])(preset).set(others).use(_markdownItAbbr2['default']).use(_markdownItContainer2['default']).use(_markdownItDeflist2['default']).use(_markdownItFootnote2['default']).use(_markdownItIns2['default']).use(_markdownItMark2['default']).use(_markdownItSub2['default']).use(_markdownItSup2['default']);
 
   var processor = function processor(contents, callback) {
     try {
