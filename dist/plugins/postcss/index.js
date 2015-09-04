@@ -30,9 +30,9 @@ var _postcssColorFunction = require('postcss-color-function');
 
 var _postcssColorFunction2 = _interopRequireDefault(_postcssColorFunction);
 
-var _autoprefixerCore = require('autoprefixer-core');
+var _autoprefixer = require('autoprefixer');
 
-var _autoprefixerCore2 = _interopRequireDefault(_autoprefixerCore);
+var _autoprefixer2 = _interopRequireDefault(_autoprefixer);
 
 var _async = require('async');
 
@@ -52,7 +52,7 @@ exports['default'] = function (options) {
 
   var processor = function processor(contents, callback) {
     try {
-      var result = (0, _postcss2['default'])([(0, _postcssImport2['default'])(options['import']), (0, _postcssCustomProperties2['default'])(options['props']), (0, _postcssCustomMedia2['default'])(options['media']), (0, _postcssCalc2['default'])(), (0, _postcssColorFunction2['default'])(), (0, _autoprefixerCore2['default'])()]).process(contents);
+      var result = (0, _postcss2['default'])([(0, _postcssImport2['default'])(options['import']), (0, _postcssCustomProperties2['default'])(options['props']), (0, _postcssCustomMedia2['default'])(options['media']), (0, _postcssCalc2['default'])(), (0, _postcssColorFunction2['default'])(), (0, _autoprefixer2['default'])()]).process(contents);
 
       callback(null, result);
     } catch (err) {
