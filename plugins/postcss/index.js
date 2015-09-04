@@ -6,7 +6,7 @@ import pcprops from 'postcss-custom-properties';
 import pcmedia from 'postcss-custom-media';
 import pccalc from 'postcss-calc';
 import pccolor from 'postcss-color-function';
-import pcprefix from 'autoprefixer-core';
+import pcprefix from 'autoprefixer';
 
 import {parallel} from 'async';
 import {debug, extend, map, match} from '../../utils';
