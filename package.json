@@ -1,7 +1,7 @@
 {
   "name":        "metalsmith-bundle",
   "description": "Bundle of Metalsmith plugins.",
-  "version":     "1.0.0",
+  "version":     "1.0.1",
   "license":     "MIT",
 
   "main": "dist/index.js",
