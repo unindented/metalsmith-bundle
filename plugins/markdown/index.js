@@ -1,21 +1,19 @@
-'use strict';
+import hljs from 'highlight.js'
+import markdown from 'markdown-it'
+import mdabbr from 'markdown-it-abbr'
+import mdcontainer from 'markdown-it-container'
+import mddeflist from 'markdown-it-deflist'
+import mdfootnote from 'markdown-it-footnote'
+import mdins from 'markdown-it-ins'
+import mdmark from 'markdown-it-mark'
+import mdsub from 'markdown-it-sub'
+import mdsup from 'markdown-it-sup'
 
-import hljs from 'highlight.js';
-import markdown from 'markdown-it';
-import mdabbr from 'markdown-it-abbr';
-import mdcontainer from 'markdown-it-container';
-import mddeflist from 'markdown-it-deflist';
-import mdfootnote from 'markdown-it-footnote';
-import mdins from 'markdown-it-ins';
-import mdmark from 'markdown-it-mark';
-import mdsub from 'markdown-it-sub';
-import mdsup from 'markdown-it-sup';
+import {parallel} from 'async'
+import {basename, dirname, extname} from 'path'
+import {debug, extend, map, match} from '../../utils'
 
-import {parallel} from 'async';
-import {basename, dirname, extname} from 'path';
-import {debug, extend, map, match} from '../../utils';
-
-let log = debug('metalsmith:markdown');
+let log = debug('metalsmith:markdown')
 
 const DEFAULTS = {
   pattern: '**/*.+(md|markdown)',
@@ -25,20 +23,20 @@ const DEFAULTS = {
   highlight: function (str, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try {
-        return hljs.highlight(lang, str).value;
+        return hljs.highlight(lang, str).value
       } catch (err) {
-        log('failed to highlight %s', lang);
+        log('failed to highlight %s', lang)
       }
     }
 
-    return str;
+    return str
   }
-};
+}
 
 export default function (options) {
-  options = extend({}, DEFAULTS, options);
+  options = extend({}, DEFAULTS, options)
 
-  let {preset, pattern, ...others} = options;
+  let {preset, pattern, ...others} = options
 
   let renderer = markdown(preset)
     .set(others)
@@ -49,58 +47,58 @@ export default function (options) {
     .use(mdins)
     .use(mdmark)
     .use(mdsub)
-    .use(mdsup);
+    .use(mdsup)
 
   let processor = function (contents, callback) {
     try {
-      let results = renderer.render(contents);
-      callback(null, results);
+      let results = renderer.render(contents)
+      callback(null, results)
     } catch (err) {
-      callback(err);
+      callback(err)
     }
-  };
+  }
 
   return function (files, metalsmith, done) {
     let tasks = map(files, function (data, file) {
       return function (callback) {
         if (!match(file, pattern)) {
-          return callback();
+          return callback()
         }
 
-        let dir = dirname(file);
-        let ext = extname(file);
-        let base = basename(file, ext);
-        let dest = `${base}.html`;
+        let dir = dirname(file)
+        let ext = extname(file)
+        let base = basename(file, ext)
+        let dest = `${base}.html`
 
         if (dir !== '.') {
-          dest = `${dir}/${dest}`;
+          dest = `${dir}/${dest}`
         }
 
-        let contents = data.contents.toString();
+        let contents = data.contents.toString()
         let processed = function (err, contents) {
           if (err) {
-            return callback(err);
+            return callback(err)
           }
 
-          data.contents = contents;
+          data.contents = contents
 
-          delete files[file];
-          files[dest] = data;
+          delete files[file]
+          files[dest] = data
 
-          callback();
-        };
+          callback()
+        }
 
-        log('converting %s to %s', file, dest);
-        processor(contents, processed);
-      };
-    });
+        log('converting %s to %s', file, dest)
+        processor(contents, processed)
+      }
+    })
 
     parallel(tasks, function (err) {
       if (err) {
-        return done(err);
+        return done(err)
       }
 
-      done();
-    });
-  };
+      done()
+    })
+  }
 }

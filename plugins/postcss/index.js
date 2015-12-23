@@ -1,73 +1,72 @@
-'use strict';
+import postcss from 'postcss'
+import pcimport from 'postcss-import'
+import pcprops from 'postcss-custom-properties'
+import pcmedia from 'postcss-custom-media'
+import pccalc from 'postcss-calc'
+import pccolor from 'postcss-color-function'
+import pcprefix from 'autoprefixer'
 
-import postcss from 'postcss';
-import pcimport from 'postcss-import';
-import pcprops from 'postcss-custom-properties';
-import pcmedia from 'postcss-custom-media';
-import pccalc from 'postcss-calc';
-import pccolor from 'postcss-color-function';
-import pcprefix from 'autoprefixer';
+import {parallel} from 'async'
+import {debug, extend, map, match} from '../../utils'
 
-import {parallel} from 'async';
-import {debug, extend, map, match} from '../../utils';
-
-let log = debug('metalsmith:postcss');
+let log = debug('metalsmith:postcss')
 
 const DEFAULTS = {
   pattern: '**/*.css'
-};
+}
 
 export default function (options) {
-  options = extend({}, DEFAULTS, options);
+  options = extend({}, DEFAULTS, options)
 
-  let {pattern} = options;
+  let {pattern} = options
 
   let processor = function (contents, callback) {
     try {
-      let result = postcss([
+      let result = postcss(
+        [
           pcimport(options['import']),
           pcprops(options['props']),
           pcmedia(options['media']),
           pccalc(),
           pccolor(),
           pcprefix()
-        ])
-        .process(contents);
+        ]
+      ).process(contents)
 
-      callback(null, result);
+      callback(null, result)
     } catch (err) {
-      callback(err);
+      callback(err)
     }
-  };
+  }
 
   return function (files, metalsmith, done) {
     let tasks = map(files, function (data, file) {
       return function (callback) {
         if (!match(file, pattern)) {
-          return callback();
+          return callback()
         }
 
-        let contents = data.contents.toString();
+        let contents = data.contents.toString()
         let processed = function (err, contents) {
           if (err) {
-            return callback(err);
+            return callback(err)
           }
 
-          data.contents = contents;
-          callback();
-        };
+          data.contents = contents
+          callback()
+        }
 
-        log('processing %s', file);
-        processor(contents, processed);
-      };
-    });
+        log('processing %s', file)
+        processor(contents, processed)
+      }
+    })
 
     parallel(tasks, function (err) {
       if (err) {
-        return done(err);
+        return done(err)
       }
 
-      done();
-    });
-  };
+      done()
+    })
+  }
 }
