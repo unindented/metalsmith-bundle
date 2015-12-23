@@ -1,4 +1,4 @@
-# Metalsmith Bundle [![Dependency Status](https://img.shields.io/gemnasium/unindented/metalsmith-bundle.svg)](https://gemnasium.com/unindented/metalsmith-bundle)
+# Metalsmith Bundle [![Version](https://img.shields.io/npm/v/metalsmith-bundle.svg)](https://www.npmjs.com/package/metalsmith-bundle) [![Build Status](https://img.shields.io/travis/unindented/metalsmith-bundle.svg)](http://travis-ci.org/unindented/metalsmith-bundle) [![Dependency Status](https://img.shields.io/gemnasium/unindented/metalsmith-bundle.svg)](https://gemnasium.com/unindented/metalsmith-bundle)
 
 Bundle of Metalsmith plugins.
 
