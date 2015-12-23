@@ -2,6 +2,7 @@ import sync from 'browser-sync'
 
 import {debug, extend} from '../../utils'
 
+let server = sync.create()
 let log = debug('metalsmith:serve')
 
 const DEFAULTS = {
@@ -14,7 +15,8 @@ export default function (options) {
   options = extend({}, DEFAULTS, options)
 
   return function (files, metalsmith, done) {
-    if (sync.active) {
+    if (server.active) {
+      server.reload()
       return done()
     }
 
@@ -24,20 +26,19 @@ export default function (options) {
       server: {baseDir: dir}
     }, options)
 
-    sync(config, function (err) {
+    server.init(config, function (err, bs) {
       if (err) {
         return done(err)
       }
 
-      done()
-    })
-
-    sync.emitter.on('service:running', function (data) {
-      let urls = data.urls
+      let urls = bs.getOption('urls')
 
       log('serving files from %s', dir)
-      log('local url: %s', urls.local)
-      log('external url: %s', urls.external)
+      log('ui url: %s', urls.get('ui'))
+      log('local url: %s', urls.get('local'))
+      log('external url: %s', urls.get('external'))
+
+      done()
     })
   }
 }

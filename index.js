@@ -15,7 +15,8 @@ export function build (config, callback) {
   // Plugin configuration.
   each(config.plugins, function (opts, plugin) {
     try {
-      metalsmith.use(require(`./plugins/${plugin}`)(opts))
+      const module = require(`./plugins/${plugin}`).default
+      metalsmith.use(module(opts))
     } catch (err) {
       callback(`failed to require plugin "${plugin}": ${err.stack}`)
     }

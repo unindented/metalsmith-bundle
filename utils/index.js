@@ -1,6 +1,6 @@
 export * from 'lodash'
 
-export {default as debug} from 'debug'
+export debug from 'debug'
 
 import multimatch from 'multimatch'
 export function match (file, pattern) {

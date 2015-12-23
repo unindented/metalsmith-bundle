@@ -22,7 +22,7 @@ export default function (options) {
 
         let extension = extname(file).substr(1)
         let contents = data.contents.toString()
-        let processor = require(`./${extension}`)
+        let processor = require(`./${extension}`).default
         let processed = function (err, contents) {
           if (err) {
             return callback(err)
