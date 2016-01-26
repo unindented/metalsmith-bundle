@@ -1,4 +1,4 @@
-import {debug, each, extend, map, max, omit, pluck, reduce} from '../../utils'
+import {debug, each, extend, map, max, omit, reduce} from '../../utils'
 
 let log = debug('metalsmith:tags')
 
@@ -27,7 +27,7 @@ export default function (options) {
       return memo
     }, {})
 
-    let biggest = max(pluck(tags, 'length'))
+    let biggest = max(map(tags, 'length'))
 
     log('adding index %s with attributes %o', index.path, omit(index, 'collection'))
     files[index.path] = index
