@@ -1,3 +1,11 @@
 language: node_js
 node_js:
   - '4.2'
+
+deploy:
+  provider: npm
+  email: unindented@gmail.com
+  api_key:
+    secure: B3d9mR4hLj6PVf1oNon+LGbsbJFmi0JD5Z6KrHatiErjd1boNRL8Vzs+mOMrJ+eU7HX9nrVfjpAiGylPJ9LJPRQqGagFSz22GvoBF+KCzPpYDsiPjEcCP5NsiO9yqqNfadzHQPwsWsmh/JnnR6DEM+MIjg6QBZ6YrrKcQweNhB9uMGA9W3sVr8CCZcz2ckJcZz+uifuK+NH+eep8P/ejpXHXEA/ZcdEoUZ5J8VzIADUq9xuTr/q9sYqaCVVgqPbkCymCkkJdF/jzpLicVC15TS24PxKH/X35G4xPT/9NgQtZlpAE/AlEzDCpJnuXxU2JnTOwHC0FEMHOrH9c2DiWyMEDFuESjhOEfQPFFKEBO1josRnL0CgbfTOBnRBOcov+5rLSy99C3KULk9Co4EHqYoF0HWrZr5H2Rea6ViYetm+BRW5daBRyyh+LnHLwZ3TqosEKISKLxjzpbJVKwGfx/zjlVNa4pGAGWsRyAImzU1vN25DKtGdJBG+DCUnfx2EsZ1rywqNwprq2bHf7y8cLxA4bnpSCdylKsU/cyPJMxdaXE7btXJ9LvO9Fdm8Jn6QsELmPYoLh5AJ42WMixisrHuqD6MvIbMCM0IvAtVaboDevWZ05ZaQccfVhGQlYfn0GbmLQ0Vm0Zh/4iv8vhx8Sf40rMQlA6zIClTjlnlK14U4=
+  on:
+    tags: true
