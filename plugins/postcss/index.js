@@ -21,22 +21,23 @@ export default function (options) {
   let {pattern} = options
 
   let processor = function (contents, callback) {
-    try {
-      postcss(
-        [
-          pcimport(options['import']),
-          pcprops(options['props']),
-          pcmedia(options['media']),
-          pccalc(),
-          pccolor(),
-          pcprefix()
-        ]
-      )
-      .process(contents)
-      .then(callback)
-    } catch (err) {
+    postcss(
+      [
+        pcimport(options['import']),
+        pcprops(options['props']),
+        pcmedia(options['media']),
+        pccalc(),
+        pccolor(),
+        pcprefix()
+      ]
+    )
+    .process(contents)
+    .then(function (result) {
+      callback(null, result.css)
+    })
+    .catch(function (err) {
       callback(err)
-    }
+    })
   }
 
   return function (files, metalsmith, done) {
