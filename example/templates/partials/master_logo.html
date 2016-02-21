@@ -1,0 +1,12 @@
+{% macro logo(link, text, icon) %}
+  <a href="{{ link }}" title="{{ text }}">
+    {{ text }}
+  </a>
+{% endmacro %}
+
+<h1 class="title">
+  {{ logo('/', global.title) }}
+</h1>
+<h2 class="subtitle">
+  {{ global.subtitle }}
+</h2>

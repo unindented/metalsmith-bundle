@@ -1,0 +1,2 @@
+<text id="{{ 2 * index - 1 }}">{{ item.title }}</text>
+<text id="{{ 2 * index }}">{{ item.excerpt }}</text>

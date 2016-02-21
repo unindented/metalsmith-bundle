@@ -1,0 +1,15 @@
+{% extends 'application.html' %}
+
+{% block contents %}
+  <article class="directory">
+    {% include 'partials/directory_header.html' %}
+
+    <ol class="records">
+      {% for item in collection %}
+        {% include 'partials/directory_item.html' %}
+      {% endfor %}
+    </ol>
+
+    {% include 'partials/directory_pagination.html' %}
+  </article>
+{% endblock contents %}

@@ -1,0 +1,16 @@
+:root {
+  --bgcolor: #eee;
+  --fgcolor: #333;
+}
+
+html, input[type="search"] {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: var(--bgcolor);
+  color: var(--fgcolor);
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+      {% if title %}
+        {{ title }} | {{ global.title }}
+      {% else %}
+        {{ global.title }} | {{ global.subtitle }}
+      {% endif %}
+    </title>
+
+    <link href="/assets/stylesheets/application.css" rel="stylesheet" />
+  </head>
+
+  <body id="top">
+    {% include 'partials/master_header.html' %}
+    {% block contents %}{% endblock contents %}
+    {% include 'partials/master_footer.html' %}
+
+    <script async="async" src="/assets/scripts/application.js"></script>
+  </body>
+</html>
+

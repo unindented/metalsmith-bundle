@@ -1,0 +1,14 @@
+<footer>
+  Posted on
+  <time datetime="{{ date | date('c') }}">{{ date | date('F jS, Y') }}</time></a>
+  under
+  {% for tag in tags %}
+    <a href="/tags/{{ tag | lower | replace('\s+', '-') }}/" rel="tag">{{ tag }}</a>
+    {%- if loop.revindex > 2 %}, {% elif loop.revindex === 2 %} and {% endif -%}
+  {% endfor %}.
+
+  Got any comments or suggestions? Send me a
+  <a href="https://twitter.com/intent/tweet?url={{ permalink | url_encode }}&amp;via={{ global.twitter }}">tweet</a>
+  or an
+  <a href="mailto:{{ global.email }}?subject={{ title | url_encode }}">email</a>.
+</footer>

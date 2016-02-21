@@ -1,0 +1,223 @@
+defaults: &defaults
+  source: "./source/"
+  destination: "./build/"
+
+  metadata: &metadata
+    global:
+      url: "https://example.com"
+      email: "john@example.com"
+      twitter: "example"
+      github: "example"
+      title: "Example"
+      subtitle: "Example Website"
+      author: "John Doe"
+
+      license:
+        text: "All content by John Doe unless otherwise noted. Some rights reserved."
+        url: "//creativecommons.org/licenses/by-sa/4.0/"
+
+  plugins: &plugins
+
+    ignore:
+      patterns:
+        - "contents/**/.*"
+
+    path:
+      pattern: "contents/+(about|blog)/**"
+
+    extend:
+      documents:
+        pattern: "contents/blog/**/index.md"
+        attributes:
+          template: "document.html"
+          extensions: []
+          date:
+            attribute: "path"
+            from: "^contents/blog/(\\d{4}-\\d{2}-\\d{2})-.+$"
+            to: "$1"
+      about:
+        pattern: "contents/about/**/index.md"
+        attributes:
+          template: "document.html"
+          extensions: []
+      errors:
+        pattern: "errors/*.md"
+        attributes:
+          template: "error.html"
+          extensions: []
+
+    collections:
+      documents:
+        pattern: "contents/blog/**/index.md"
+        sortBy: "date"
+        reverse: true
+        index: 6
+
+    directories:
+      documents:
+        path: "contents/index.html"
+        template: "directory.html"
+        collection: "documents"
+        contents: ""
+        max: 6
+      atom:
+        path: "contents/feed.atom"
+        template: "feed.atom"
+        collection: "documents"
+        contents: ""
+        max: 6
+      tile:
+        path: "contents/feed.tile"
+        template: "feed.tile"
+        collection: "documents"
+        contents: ""
+        max: 3
+
+    tags:
+      index:
+        path: "contents/tags/index.html"
+        template: "tags.html"
+        collection: "documents"
+        title: "Tags"
+        contents: ""
+      individual:
+        path: "contents/tags/$1/index.html"
+        template: "directory.html"
+        title: "Contents tagged with ‘$1’"
+        contents: ""
+        paginate: 6
+
+    paginate:
+      pattern: "**/index.html"
+
+    markdown:
+      pattern: "**/*.md"
+      preset: "default"
+      html: true
+      xhtmlOut: true
+      linkify: true
+      typographer: true
+
+    excerpt:
+      pattern: "contents/blog/**/index.html"
+      selector: "p"
+      start: 0
+      end: 2
+
+    link:
+      documents:
+        pattern: "contents/blog/**"
+        from: "^contents(/blog/)(\\d+/)?(?:(?:\\d{4}-\\d{2}-\\d{2})-([^/]+/))?(?:index\\.html|((?:[^.]+)\\.(?:.+)))$"
+        to: "$1$2$3$4"
+      sections:
+        pattern: "contents/+(about|tags)/**"
+        from: "^contents(/(?:(?:[^/]+)/)+)(?:index\\.html|((?:[^.]+)\\.(?:.+)))$"
+        to: "$1$2"
+      misc:
+        pattern: "contents/*.*"
+        from: "^contents(/.+)$"
+        to: "$1"
+
+    date:
+      pattern: "contents/feed.*"
+
+    template:
+      pattern: "**"
+      directory: "templates"
+      engine: "swig"
+
+    browserify:
+      pattern: ["**/*.js", "!**/vendor/**"]
+      transform:
+        - ["babelify", {"presets": ["es2015"], "ignore": ["/lib/", "/vendor/"]}]
+
+    postcss:
+      pattern: "**/*.css"
+      import:
+        path:
+          - "source/assets/stylesheets"
+          - "node_modules"
+
+    minify:
+      pattern: "**/*.+(css|html|js)"
+
+    move:
+      pattern: "**"
+
+  sync: &sync
+    source: "./build/"
+    options:
+      - "--archive"
+      - "--compress"
+      - "--delete"
+      - "--verbose"
+
+  debug:
+    - "build"
+    - "sync"
+    - "glyphs"
+    - "icons"
+    - "serve"
+    - "watch"
+
+# BUILD ---------------------------------------------------------------#
+
+build:
+  <<: *defaults
+
+# SERVE ---------------------------------------------------------------#
+
+serve:
+  <<: *defaults
+
+  plugins:
+    <<: *plugins
+
+    minify:
+      pattern: "**/*.none"
+
+    serve:
+      online: false
+      port: 8000
+
+# WATCH ---------------------------------------------------------------#
+
+watch:
+  <<: *defaults
+
+  plugins:
+    <<: *plugins
+
+    minify:
+      pattern: "**/*.none"
+
+    watch:
+      source: "."
+      pattern: ["source/**", "templates/**"]
+      delay: 500
+
+    serve:
+      online: false
+      port: 8000
+
+# SYNC DEVELOPMENT ----------------------------------------------------#
+
+sync:
+  <<: *defaults
+
+  sync:
+    <<: *sync
+    destination: "example:/home/example/dev.example.com/"
+
+# SYNC PRODUCTION -----------------------------------------------------#
+
+sync-prod:
+  <<: *defaults
+
+  metadata:
+    <<: *metadata
+    secure: true
+
+  sync:
+    <<: *sync
+    destination: "example:/home/example/example.com/"

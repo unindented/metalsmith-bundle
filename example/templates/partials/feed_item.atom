@@ -1,0 +1,14 @@
+<entry>
+  <id>{{ item.permalink }}</id>
+  <link rel="alternate" type="text/html" href="{{ item.permalink }}"/>
+  <title>{{ item.title }}</title>
+  <updated>{{ item.date | date('c') }}</updated>
+  <author>
+    <name>{{ item.author }}</name>
+  </author>
+  {% for tag in item.tags %}
+    <category term="{{ tag | lower | replace('\s+', '-') }}" label="{{ tag }}"/>
+  {% endfor %}
+  <summary>{{ item.excerpt }}</summary>
+  <content type="html">{{ item.contents }}</content>
+</entry>

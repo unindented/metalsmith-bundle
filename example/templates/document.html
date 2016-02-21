@@ -1,0 +1,15 @@
+{% extends 'application.html' %}
+
+{% block contents %}
+  <article class="document">
+    {% include 'partials/document_header.html' %}
+
+    <div class="body">
+      {{ contents | safe }}
+    </div>
+
+    {% if date %}
+      {% include 'partials/document_footer.html' %}
+    {% endif %}
+  </article>
+{% endblock contents %}

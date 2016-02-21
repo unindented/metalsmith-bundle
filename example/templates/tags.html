@@ -1,0 +1,15 @@
+{% extends 'application.html' %}
+
+{% block contents %}
+  <article class="directory">
+    <header>
+      <h1 class="title">{{ title }}</h1>
+    </header>
+
+    <ul class="cloud">
+      {% for item in collection %}
+        {% include 'partials/tags_item.html' %}
+      {% endfor %}
+    </ul>
+  </article>
+{% endblock contents %}
