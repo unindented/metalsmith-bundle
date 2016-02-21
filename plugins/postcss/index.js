@@ -22,7 +22,7 @@ export default function (options) {
 
   let processor = function (contents, callback) {
     try {
-      let result = postcss(
+      postcss(
         [
           pcimport(options['import']),
           pcprops(options['props']),
@@ -31,9 +31,9 @@ export default function (options) {
           pccolor(),
           pcprefix()
         ]
-      ).process(contents)
-
-      callback(null, result)
+      )
+      .process(contents)
+      .then(callback)
     } catch (err) {
       callback(err)
     }
