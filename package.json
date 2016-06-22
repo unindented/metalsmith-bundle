@@ -33,7 +33,7 @@
     "highlight.js": "^9.0.0",
     "html-minifier": "^2.0.0",
     "lodash": "^4.0.0",
-    "markdown-it": "^6.0.0",
+    "markdown-it": "^7.0.0",
     "markdown-it-abbr": "^1.0.0",
     "markdown-it-container": "^2.0.0",
     "markdown-it-deflist": "^2.0.0",
