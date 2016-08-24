@@ -46,7 +46,7 @@
     "minimist": "^1.2.0",
     "multimatch": "^2.1.0",
     "postcss": "^5.0.10",
-    "postcss-calc": "^5.0.0",
+    "postcss-calc": "^5.3.1",
     "postcss-color-function": "^2.0.0",
     "postcss-custom-media": "^5.0.0",
     "postcss-custom-properties": "^5.0.0",
