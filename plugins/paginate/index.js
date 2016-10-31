@@ -37,7 +37,7 @@ export default function (options) {
 
       each(range(current + 1, total), function (i) {
         let next = extend({}, data, {
-          path: data.path.replace(/\/([^\/]+)$/, `/${i + 1}/$1`),
+          path: data.path.replace(/\/([^/]+)$/, `/${i + 1}/$1`),
           current: i,
           total: total,
           collection: collection.slice(i * paginate, (i + 1) * paginate)
