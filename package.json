@@ -31,7 +31,7 @@
     "debug": "^2.2.0",
     "gaze": "^1.1.2",
     "highlight.js": "^9.7.0",
-    "html-minifier": "^3.1.0",
+    "html-minifier": "^3.2.0",
     "lodash": "^4.16.5",
     "markdown-it": "^8.0.1",
     "markdown-it-abbr": "^1.0.4",
