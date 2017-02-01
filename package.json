@@ -28,7 +28,7 @@
     "cheerio": "^0.22.0",
     "clean-css": "^4.0.0",
     "consolidate": "^0.14.1",
-    "debug": "^2.2.0",
+    "debug": "^2.4.0",
     "gaze": "^1.1.2",
     "highlight.js": "^9.7.0",
     "html-minifier": "^3.1.0",
