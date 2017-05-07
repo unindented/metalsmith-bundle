@@ -45,7 +45,7 @@
     "metalsmith": "^2.2.2",
     "minimist": "^1.2.0",
     "multimatch": "^2.1.0",
-    "postcss": "^5.2.5",
+    "postcss": "^6.0.1",
     "postcss-calc": "^5.3.1",
     "postcss-color-function": "^3.0.0",
     "postcss-custom-media": "^5.0.1",
